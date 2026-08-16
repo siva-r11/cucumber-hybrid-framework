@@ -1,0 +1,27 @@
+# Build output
+target/
+build/
+out/
+
+# Reports & artifacts
+allure-results/
+allure-report/
+.allure/
+/screenshots/
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets / overrides (never commit real credentials)
+config/local.properties
+*.env

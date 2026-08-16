@@ -1,0 +1,10 @@
+{
+  "newUser": {
+    "name": "Ada Lovelace",
+    "job": "Automation Engineer"
+  },
+  "updateUser": {
+    "name": "Ada Lovelace",
+    "job": "Principal SDET"
+  }
+}
