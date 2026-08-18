@@ -20,12 +20,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class LoginSteps {
 
-    private final TestContext context;
     private LoginPage loginPage;
     private SecureAreaPage secureAreaPage;
 
     public LoginSteps(TestContext context) {
-        this.context = context;
     }
 
     @Given("the login page is open")
