@@ -7,7 +7,8 @@
     "name": { "type": "string", "minLength": 1 },
     "job": { "type": "string", "minLength": 1 },
     "id": { "type": "string" },
-    "createdAt": { "type": "string" }
+    "createdAt": { "type": "string" },
+    "_meta": { "type": "object" }
   },
   "additionalProperties": false
 }

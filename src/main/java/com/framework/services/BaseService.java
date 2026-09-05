@@ -22,7 +22,7 @@ public abstract class BaseService {
      * Logs and returns the response. Kept as a distinct step so the Allure timeline shows a
      * clear "received response" node with status and latency.
      */
-    @Step("Received response: status {response.statusCode}")
+    @Step("Received API response")
     protected Response logResponse(Response response) {
         log.info("Response status={} time={}ms",
                 response.statusCode(), response.time());

@@ -24,6 +24,9 @@
         "text": { "type": "string" }
       },
       "additionalProperties": false
+    },
+    "_meta": {
+      "type": "object"
     }
   },
   "additionalProperties": false
