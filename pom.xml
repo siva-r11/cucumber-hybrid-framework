@@ -14,8 +14,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
 
         <!-- Dependency versions -->
         <selenium.version>4.21.0</selenium.version>
@@ -32,7 +32,7 @@
         <allure.version>2.29.1</allure.version>
         <!-- <allure.cucumber.version>2.27.0</allure.cucumber.version> -->
         <aspectj.version>1.9.22</aspectj.version>
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.48</lombok.version>
         <assertj.version>3.25.3</assertj.version>
         <commons.io.version>2.16.1</commons.io.version>
         <datafaker.version>2.2.2</datafaker.version>
