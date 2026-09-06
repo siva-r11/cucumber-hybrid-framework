@@ -20,8 +20,8 @@
         <!-- Dependency versions -->
         <selenium.version>4.21.0</selenium.version>
         <cucumber.version>7.34.6</cucumber.version>
-        <junit.platform.version>1.10.2</junit.platform.version>
-        <junit.jupiter.version>5.10.2</junit.jupiter.version>
+        <junit.platform.version>1.14.2</junit.platform.version>
+        <junit.jupiter.version>5.14.2</junit.jupiter.version>
         <restassured.version>5.4.0</restassured.version>
         <webdrivermanager.version>5.8.0</webdrivermanager.version>
         <jackson.version>2.17.1</jackson.version>
@@ -32,7 +32,7 @@
         <allure.version>2.29.1</allure.version>
         <!-- <allure.cucumber.version>2.27.0</allure.cucumber.version> -->
         <aspectj.version>1.9.22</aspectj.version>
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.48</lombok.version>
         <assertj.version>3.25.3</assertj.version>
         <commons.io.version>2.16.1</commons.io.version>
         <datafaker.version>2.2.2</datafaker.version>
