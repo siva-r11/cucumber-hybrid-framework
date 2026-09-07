@@ -2,7 +2,6 @@ package com.framework.core.api;
 
 import com.framework.config.ConfigManager;
 import com.framework.config.FrameworkConfig;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +49,8 @@ public final class AuthManager {
         FrameworkConfig config = ConfigManager.get();
         log.info("Generating auth token for user '{}'", username);
 
-        Response response = RestAssured
-                .given()
-                .baseUri(config.apiBaseUrl())
+        Response response = io.restassured.RestAssured
+            .given(RequestSpecFactory.base())
                 .contentType("application/json")
                 .body(Map.of("email", username, "password", password))
                 .post(config.authTokenEndpoint());

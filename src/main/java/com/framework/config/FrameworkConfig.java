@@ -71,6 +71,14 @@ public interface FrameworkConfig extends Config {
     @DefaultValue("30000")
     int apiTimeoutMs();
 
+    @Key("api.relaxed.ssl")
+    @DefaultValue("false")
+    boolean apiRelaxedSsl();
+
+    @Key("api.key")
+    @DefaultValue("")
+    String apiKey();
+
     // ---------- Auth ----------
     @Key("auth.username")
     String authUsername();

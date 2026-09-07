@@ -6,6 +6,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.config.SSLConfig;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
@@ -26,20 +27,28 @@ public final class RequestSpecFactory {
     public static RequestSpecification base() {
         FrameworkConfig config = ConfigManager.get();
 
+        RequestSpecBuilder builder = new RequestSpecBuilder()
+            .setBaseUri(config.apiBaseUrl())
+            .setContentType(ContentType.JSON)
+            .setAccept(ContentType.JSON)
+            .addFilter(new AllureRestAssured())
+            .log(io.restassured.filter.log.LogDetail.METHOD)
+            .log(io.restassured.filter.log.LogDetail.URI);
+
         RestAssuredConfig raConfig = RestAssuredConfig.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.connection.timeout", config.apiTimeoutMs())
                         .setParam("http.socket.timeout", config.apiTimeoutMs()));
 
-        return new RequestSpecBuilder()
-                .setBaseUri(config.apiBaseUrl())
-                .setContentType(ContentType.JSON)
-                .setAccept(ContentType.JSON)
-                .setConfig(raConfig)
-                .addFilter(new AllureRestAssured())
-                .log(io.restassured.filter.log.LogDetail.METHOD)
-                .log(io.restassured.filter.log.LogDetail.URI)
-                .build();
+        if (config.apiRelaxedSsl()) {
+            raConfig = raConfig.sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation());
+        }
+
+        if (!config.apiKey().isBlank()) {
+            builder.addHeader("x-api-key", config.apiKey());
+        }
+
+        return builder.setConfig(raConfig).build();
     }
 
     /** Base spec plus a bearer token in the Authorization header. */
