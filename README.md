@@ -1,6 +1,6 @@
 # Selenium · Cucumber BDD · REST Assured — Hybrid Test Automation Framework
 
-A scalable, maintainable test automation framework that supports **UI (Web)** and **API** testing from a single codebase, with a first-class **hybrid** mode where API calls arrange state for UI verification. Built with Java 17, Selenium 4, Cucumber 7 (BDD), REST Assured, JSON-Schema contract validation, Allure reporting, and a ready-to-use GitHub Actions pipeline.
+A scalable, maintainable test automation framework that supports **UI (Web)** and **API** testing from a single codebase, with a first-class **hybrid** mode where API calls arrange state for UI verification. Built with Java 21, Selenium 4, Cucumber 7 (BDD), REST Assured, JSON-Schema contract validation, Allure reporting, and a ready-to-use GitHub Actions pipeline.
 
 ---
 
@@ -47,11 +47,13 @@ automation-framework/
 │   ├── pages/                          # ---- Page Object Model (UI) ----
 │   │   ├── BasePage.java               # Common actions on top of WaitUtils
 │   │   ├── LoginPage.java              # Form login + token session seeding
+│   │   ├── ParaBankRegistrationPage.java # Registration + logout/login navigation
 │   │   └── SecureAreaPage.java
 │   ├── services/                       # ---- Service layer (API) ----
 │   │   ├── BaseService.java
 │   │   └── UserService.java            # /users endpoints
 │   ├── models/
+│   │   ├── RegistrationData.java       # Immutable ParaBank registration data
 │   │   └── User.java                   # Jackson + Lombok POJO
 │   └── utils/                          # ---- Shared utilities ----
 │       ├── JsonUtils.java              # One configured ObjectMapper
@@ -70,6 +72,7 @@ automation-framework/
     │   │   └── FailedTestRunner.java     # Reruns only previously-failed scenarios
     │   └── stepdefinitions/
     │       ├── ui/LoginSteps.java
+    │       ├── ui/ParaBankRegistrationSteps.java
     │       ├── api/UserApiSteps.java
     │       └── hybrid/UserOnboardingSteps.java
     └── resources/
@@ -85,7 +88,7 @@ automation-framework/
 
 ## Prerequisites
 
-- **JDK 17+**
+- **JDK 21+**
 - **Maven 3.9+**
 - Chrome / Firefox / Edge installed locally (drivers are auto-resolved by WebDriverManager)
 - (Optional) **Allure CLI** to open reports locally
@@ -106,6 +109,9 @@ mvn clean test -Dcucumber.filter.tags="@api"
 mvn clean test -Dcucumber.filter.tags="@ui"
 mvn clean test -Dcucumber.filter.tags="@hybrid"
 
+# ParaBank registration flow only
+mvn clean test -Dcucumber.filter.tags="@parabank"
+
 # Cross-browser + environment overrides
 mvn clean test -Dbrowser=firefox -Denv=dev -Dheadless=false
 
@@ -123,6 +129,28 @@ mvn test -Dtest=FailedTestRunner
 - `@ui`, `@api`, `@hybrid` — layer selectors (also drive which hooks fire)
 - `@smoke` — fast, critical-path subset
 - `@regression` — full coverage
+- `@parabank` — ParaBank registration and login-navigation flow
+
+### ParaBank registration flow
+
+The `@parabank` scenario opens `https://parabank.parasoft.com/parabank/register.htm`, registers a new customer, verifies that the account was created, logs out, and confirms that the login page is displayed.
+
+`TestDataProvider.generateRegistrationData()` creates an isolated user for every scenario with the following values:
+
+| Field | Value |
+|---|---|
+| First name / last name | `Jane` / `Doe` |
+| Address | `123 Main St`, `Springfield`, `IL`, `62704` |
+| Phone | `555-0100` |
+| SSN | Random value in `###-##-####` format |
+| Username | Unique `qauser<suffix>` value |
+| Password | `P@ssw0rd123` |
+
+The application URL is configured with `parabank.base.url` in `config/test.properties` and can be overridden at runtime:
+
+```bash
+mvn clean test -Dcucumber.filter.tags="@parabank" -Dparabank.base.url=https://parabank.parasoft.com/parabank
+```
 
 ---
 

@@ -35,6 +35,10 @@ public interface FrameworkConfig extends Config {
     @Key("web.base.url")
     String webBaseUrl();
 
+    @Key("parabank.base.url")
+    @DefaultValue("https://parabank.parasoft.com/parabank")
+    String paraBankBaseUrl();
+
     @Key("browser")
     @DefaultValue("chrome")
     String browser();
