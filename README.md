@@ -47,6 +47,7 @@ automation-framework/
 │   ├── pages/                          # ---- Page Object Model (UI) ----
 │   │   ├── BasePage.java               # Common actions on top of WaitUtils
 │   │   ├── LoginPage.java              # Form login + token session seeding
+│   │   ├── ParaBankLoginPage.java      # Login with newly registered credentials
 │   │   ├── ParaBankRegistrationPage.java # Registration + logout/login navigation
 │   │   └── SecureAreaPage.java
 │   ├── services/                       # ---- Service layer (API) ----
@@ -72,6 +73,7 @@ automation-framework/
     │   │   └── FailedTestRunner.java     # Reruns only previously-failed scenarios
     │   └── stepdefinitions/
     │       ├── ui/LoginSteps.java
+    │       ├── ui/ParaBankLoginSteps.java
     │       ├── ui/ParaBankRegistrationSteps.java
     │       ├── api/UserApiSteps.java
     │       └── hybrid/UserOnboardingSteps.java
@@ -112,6 +114,9 @@ mvn clean test -Dcucumber.filter.tags="@hybrid"
 # ParaBank registration flow only
 mvn clean test -Dcucumber.filter.tags="@parabank"
 
+# ParaBank login flow only
+mvn clean test -Dcucumber.filter.tags="@parabank-login"
+
 # Cross-browser + environment overrides
 mvn clean test -Dbrowser=firefox -Denv=dev -Dheadless=false
 
@@ -130,10 +135,11 @@ mvn test -Dtest=FailedTestRunner
 - `@smoke` — fast, critical-path subset
 - `@regression` — full coverage
 - `@parabank` — ParaBank registration and login-navigation flow
+- `@parabank-login` — ParaBank login with newly generated customer credentials
 
 ### ParaBank registration flow
 
-The `@parabank` scenario opens `https://parabank.parasoft.com/parabank/register.htm`, registers a new customer, verifies that the account was created, logs out, and confirms that the login page is displayed.
+The registration and login behaviors are kept in separate feature files and step-definition classes. The `@parabank` registration scenario verifies account creation. The `@parabank-login` scenario creates an isolated customer as setup, logs out, signs back in with the generated username and password, and confirms that the account overview is displayed.
 
 `TestDataProvider.generateRegistrationData()` creates an isolated user for every scenario with the following values:
 

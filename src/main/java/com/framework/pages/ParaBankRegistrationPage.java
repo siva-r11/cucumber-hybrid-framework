@@ -22,7 +22,6 @@ public class ParaBankRegistrationPage extends BasePage {
     private static final By REGISTER = By.cssSelector("input[value='Register']");
     private static final By SUCCESS_MESSAGE = By.cssSelector("#rightPanel p");
     private static final By LOG_OUT = By.linkText("Log Out");
-    private static final By LOGIN_BUTTON = By.cssSelector("#loginPanel input[value='Log In']");
 
     public ParaBankRegistrationPage(WebDriver driver) {
         super(driver);
@@ -55,15 +54,12 @@ public class ParaBankRegistrationPage extends BasePage {
     }
 
     @Step("Log out of ParaBank")
-    public void logOut() {
+    public ParaBankLoginPage logOut() {
         click(LOG_OUT);
+        return new ParaBankLoginPage(driver);
     }
 
     public boolean isRegistrationFormLoaded() {
         return isDisplayed(FIRST_NAME) && isDisplayed(REGISTER);
-    }
-
-    public boolean isLoginPageLoaded() {
-        return isDisplayed(LOGIN_BUTTON);
     }
 }
