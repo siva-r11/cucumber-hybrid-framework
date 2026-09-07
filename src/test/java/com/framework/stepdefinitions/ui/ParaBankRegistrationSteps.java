@@ -39,16 +39,4 @@ public class ParaBankRegistrationSteps {
                 .as("ParaBank registration confirmation for %s", registrationData.username())
                 .contains("Your account was created successfully");
     }
-
-    @When("I navigate to the ParaBank login page")
-    public void iNavigateToTheParaBankLoginPage() {
-        registrationPage.logOut();
-    }
-
-    @Then("the ParaBank login page should be displayed")
-    public void theParaBankLoginPageShouldBeDisplayed() {
-        assertThat(registrationPage.isLoginPageLoaded())
-                .as("ParaBank login page loaded")
-                .isTrue();
-    }
 }
