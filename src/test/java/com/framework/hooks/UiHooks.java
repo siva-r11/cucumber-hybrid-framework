@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Lifecycle hooks scoped to UI scenarios only (tag {@code @ui}).
+ * Lifecycle hooks scoped to UI and hybrid scenarios.
  *
  * <p>Cucumber runs {@code @Before}/{@code @After} around every matching scenario, giving us the
  * setup/teardown "fixture" behaviour: a fresh, thread-local browser per scenario and guaranteed
@@ -23,14 +23,14 @@ public class UiHooks {
 
     private static final Logger log = LoggerFactory.getLogger(UiHooks.class);
 
-    @Before(value = "@ui", order = 10)
+    @Before(value = "@ui or @hybrid", order = 10)
     public void startBrowser(Scenario scenario) {
         String browser = ConfigManager.get().browser();
         log.info("[UI SETUP] '{}' -> launching {}", scenario.getName(), browser);
         DriverManager.set(DriverFactory.create(BrowserType.from(browser)));
     }
 
-    @After(value = "@ui", order = 10)
+    @After(value = "@ui or @hybrid", order = 10)
     public void stopBrowser(Scenario scenario) {
         try {
             if (scenario.isFailed() && DriverManager.isInitialised()) {
