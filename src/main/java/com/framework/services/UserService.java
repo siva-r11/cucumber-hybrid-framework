@@ -41,12 +41,12 @@ public class UserService extends BaseService {
                         .get(USERS));
     }
 
-    /** POST create a user (authenticated). */
+        /** POST create a user. */
     @Step("Create user: {user.name}")
     public Response createUser(User user, String token) {
         log.info("POST {} name={}", USERS, user.getName());
         return logResponse(
-                given(RequestSpecFactory.authenticated(token))
+                                given(RequestSpecFactory.base())
                         .body(user)
                         .when()
                         .post(USERS));
