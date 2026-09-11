@@ -39,6 +39,10 @@ public interface FrameworkConfig extends Config {
     @DefaultValue("https://parabank.parasoft.com/parabank")
     String paraBankBaseUrl();
 
+    @Key("orangehrm.base.url")
+    @DefaultValue("https://opensource-demo.orangehrmlive.com/web/index.php")
+    String orangeHrmBaseUrl();
+
     @Key("browser")
     @DefaultValue("chrome")
     String browser();
