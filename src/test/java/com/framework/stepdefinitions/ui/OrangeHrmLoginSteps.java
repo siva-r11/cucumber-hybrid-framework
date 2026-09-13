@@ -35,6 +35,13 @@ public class OrangeHrmLoginSteps {
         assertThat(dashboardPage.getHeading()).as("OrangeHRM dashboard heading").isEqualTo("Dashboard");
     }
 
+    @Then("the OrangeHRM dashboard layout should be visible")
+    public void theOrangeHrmDashboardLayoutShouldBeVisible() {
+        assertThat(dashboardPage.isLoaded()).as("OrangeHRM dashboard loaded").isTrue();
+        assertThat(dashboardPage.hasSidePanel()).as("OrangeHRM side panel visible").isTrue();
+        assertThat(dashboardPage.hasDashboardGrid()).as("OrangeHRM dashboard grid visible").isTrue();
+    }
+
     @Then("the OrangeHRM login error should contain {string}")
     public void theOrangeHrmLoginErrorShouldContain(String expected) {
         assertThat(loginPage.getErrorMessage()).as("OrangeHRM login error").contains(expected);
