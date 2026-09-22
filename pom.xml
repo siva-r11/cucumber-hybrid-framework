@@ -35,6 +35,7 @@
         <lombok.version>1.18.48</lombok.version>
         <assertj.version>3.25.3</assertj.version>
         <commons.io.version>2.16.1</commons.io.version>
+        <pdfbox.version>3.0.3</pdfbox.version>
         <datafaker.version>2.2.2</datafaker.version>
 
         <!-- Plugin versions -->
@@ -189,6 +190,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons.io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${pdfbox.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

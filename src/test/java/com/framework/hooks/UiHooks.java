@@ -6,6 +6,7 @@ import com.framework.core.driver.DriverFactory;
 import com.framework.core.driver.DriverManager;
 import com.framework.utils.ScreenshotUtils;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.slf4j.Logger;
@@ -28,11 +29,22 @@ public class UiHooks {
         String browser = ConfigManager.get().browser();
         log.info("[UI SETUP] '{}' -> launching {}", scenario.getName(), browser);
         DriverManager.set(DriverFactory.create(BrowserType.from(browser)));
+        ScreenshotUtils.startScenario();
+    }
+
+    @AfterStep(value = "@ui or @hybrid", order = 20)
+    public void captureStepScreenshot(Scenario scenario) {
+        if (DriverManager.isInitialised()) {
+            ScreenshotUtils.captureStep(DriverManager.get(), scenario);
+        }
     }
 
     @After(value = "@ui or @hybrid", order = 10)
     public void stopBrowser(Scenario scenario) {
         try {
+            if (DriverManager.isInitialised()) {
+                ScreenshotUtils.writeStepPdf(scenario.getName());
+            }
             if (scenario.isFailed() && DriverManager.isInitialised()) {
                 log.warn("[UI TEARDOWN] '{}' FAILED -> capturing screenshot", scenario.getName());
                 ScreenshotUtils.captureAndAttach(DriverManager.get(), scenario.getName());

@@ -15,6 +15,7 @@ public final class FrameworkConstants {
     public static final String TEST_DATA_PATH = RESOURCES_PATH + "/testdata";
     public static final String SCHEMA_PATH = RESOURCES_PATH + "/schemas";
     public static final String SCREENSHOT_DIR = USER_DIR + "/target/screenshots";
+    public static final String STEP_PDF_DIR = USER_DIR + "/target/step-pdfs";
     public static final String ALLURE_RESULTS_DIR = USER_DIR + "/target/allure-results";
 
     // ---------- Auth context keys ----------
