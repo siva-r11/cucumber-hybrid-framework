@@ -1,6 +1,7 @@
 package com.framework.pages;
 
 import com.framework.config.ConfigManager;
+import com.framework.utils.WaitUtils;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,12 @@ public class OrangeHrmLoginPage extends BasePage {
         type(USERNAME, username);
         type(PASSWORD, password);
         click(LOGIN);
+        // Wait a moment for navigation to complete
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         return new OrangeHrmDashboardPage(driver);
     }
 
