@@ -11,7 +11,8 @@ import java.util.List;
 public class OrangeHrmAdminPage extends BasePage {
 
     private static final By ADMIN_HEADING = By.cssSelector(".oxd-topbar-header-breadcrumb h6");
-    private static final By USERNAME_FILTER = By.cssSelector("input[placeholder='Username']");
+    // The System Users search form Username field has no placeholder; locate it by its label.
+    private static final By USERNAME_FILTER = inputForLabel("Username");
     private static final By EMPLOYEE_FILTER = By.cssSelector("input[placeholder='Type for hints...']");
     private static final By USER_ROLE_FILTER = selectForLabel("User Role");
     private static final By STATUS_FILTER = selectForLabel("Status");
