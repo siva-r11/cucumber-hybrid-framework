@@ -78,6 +78,9 @@ public final class DriverFactory {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized", "--remote-allow-origins=*",
                 "--disable-notifications", "--disable-gpu");
+        // Required for stable headless runs in CI/containers: the default /dev/shm is too small,
+        // which makes the Chrome renderer hang ("Timed out receiving message from renderer").
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         if (headless) {
             options.addArguments("--headless=new", "--window-size=1920,1080");
         }
