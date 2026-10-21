@@ -8,7 +8,14 @@
     "job": { "type": "string", "minLength": 1 },
     "id": { "type": "string" },
     "createdAt": { "type": "string" },
-    "_meta": { "type": "object" }
+    "_meta": { "type": "object" },
+    "support": {
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "text": { "type": "string" }
+      }
+    }
   },
   "additionalProperties": false
 }
