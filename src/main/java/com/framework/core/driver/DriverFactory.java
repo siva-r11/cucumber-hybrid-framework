@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 import java.time.Duration;
 
 /**
@@ -68,8 +68,8 @@ public final class DriverFactory {
 
     private static WebDriver createRemote(String remoteUrl, MutableCapabilities options) {
         try {
-            return new RemoteWebDriver(new URL(remoteUrl), options);
-        } catch (MalformedURLException e) {
+            return new RemoteWebDriver(URI.create(remoteUrl).toURL(), options);
+        } catch (IllegalArgumentException | MalformedURLException e) {
             throw new IllegalStateException("Invalid remote WebDriver URL: " + remoteUrl, e);
         }
     }

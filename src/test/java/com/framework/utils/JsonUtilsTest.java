@@ -39,7 +39,7 @@ class JsonUtilsTest {
         List<User> users = JsonUtils.listFromFile(file.toString(), User.class);
         String raw = JsonUtils.readRaw(file.toString());
 
-        assertThat(users).extracting(User::getName).containsExactly("Ada", "Grace");
+        assertThat(users).extracting(user -> user.getName()).containsExactly("Ada", "Grace");
         assertThat(raw).contains("\"name\":\"Ada\"");
         Files.deleteIfExists(file);
     }
